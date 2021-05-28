@@ -64,7 +64,7 @@ public class TracingUtils {
     Span span = spanBuilder.start();
     SpanDecorator.onResponse(span);
     SpanDecorator.addProperties(span, props);
-    if (routingKey != null) span.setTag("routing.key", routingKey);
+    if (routingKey != null) span.setTag("routingKey", routingKey);
 
     try {
       if (props.getHeaders() != null) {
