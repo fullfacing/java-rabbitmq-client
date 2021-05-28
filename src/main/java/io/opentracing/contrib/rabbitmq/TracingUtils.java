@@ -63,6 +63,7 @@ public class TracingUtils {
 
     Span span = spanBuilder.start();
     SpanDecorator.onResponse(span);
+    SpanDecorator.addProperties(span, props);
 
     try {
       if (props.getHeaders() != null) {
@@ -104,6 +105,7 @@ public class TracingUtils {
 
     Span span = spanBuilder.start();
     SpanDecorator.onRequest(exchange, span);
+    if (props != null) SpanDecorator.addProperties(span, props);
 
     return span;
   }
