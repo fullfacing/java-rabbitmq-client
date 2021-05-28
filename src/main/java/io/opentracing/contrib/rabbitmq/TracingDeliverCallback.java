@@ -33,7 +33,7 @@ public class TracingDeliverCallback implements DeliverCallback {
 
   @Override
   public void handle(String consumerTag, Delivery message) throws IOException {
-    Span child = TracingUtils.buildChildSpan(message.getProperties(), queue, tracer);
+    Span child = TracingUtils.buildChildSpan(message.getProperties(), queue, tracer, null);
     try (Scope ignored = tracer.scopeManager().activate(child)) {
       deliverCallback.handle(consumerTag, message);
     } finally {

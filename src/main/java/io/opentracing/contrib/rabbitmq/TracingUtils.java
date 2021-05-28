@@ -41,14 +41,14 @@ public class TracingUtils {
   }
 
   public static void buildAndFinishChildSpan(AMQP.BasicProperties props, String queue,
-      Tracer tracer) {
-    Span child = buildChildSpan(props, queue, tracer);
+      Tracer tracer, String routingKey) {
+    Span child = buildChildSpan(props, queue, tracer, routingKey);
     if (child != null) {
       child.finish();
     }
   }
 
-  public static Span buildChildSpan(AMQP.BasicProperties props, String queue, Tracer tracer) {
+  public static Span buildChildSpan(AMQP.BasicProperties props, String queue, Tracer tracer, String routingKey) {
     Tracer.SpanBuilder spanBuilder = tracer.buildSpan("receive")
         .withTag(Tags.SPAN_KIND.getKey(), Tags.SPAN_KIND_CONSUMER);
 
@@ -64,6 +64,7 @@ public class TracingUtils {
     Span span = spanBuilder.start();
     SpanDecorator.onResponse(span);
     SpanDecorator.addProperties(span, props);
+    if (routingKey != null) span.setTag("routingKey", routingKey);
 
     try {
       if (props.getHeaders() != null) {
