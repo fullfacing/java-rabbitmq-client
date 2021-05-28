@@ -9,7 +9,7 @@ jobs:
     steps:
       - uses: actions/setup-java@v1
         with:
-          java-version: '11'
+          java-version: '8'
       - uses: actions/checkout@v2
       - uses: actions/cache@v2
         with:
@@ -17,5 +17,10 @@ jobs:
           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
           restore-keys: |
             ${{ runner.os }}-maven-
-      - name: Publish Artificat
-        run: mvn clean deploy
+      - name: Deploy to Github Package Registry
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          mkdir ~/.m2
+          echo "<settings><servers><server><id>github</id><username>fullfacing</username><password>${GITHUB_TOKEN}</password></server></servers></settings>" > ~/.m2/settings.xml
+          mvn deploy
