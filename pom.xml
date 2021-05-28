@@ -142,34 +142,6 @@
         </configuration>
       </plugin>
       <plugin>
-        <groupId>com.mycila</groupId>
-        <artifactId>license-maven-plugin</artifactId>
-        <version>3.0</version>
-        <configuration>
-          <mapping>
-            <java>SLASHSTAR_STYLE</java>
-          </mapping>
-          <header>header.txt</header>
-          <strictCheck>true</strictCheck>
-          <excludes>
-            <exclude>LICENSE</exclude>
-            <exclude>mvnw</exclude>
-            <exclude>mvnw.cmd</exclude>
-            <exclude>.mvn/wrapper/maven-wrapper.properties</exclude>
-            <exclude>src/test/resources/passwd.properties</exclude>
-            <exclude>.coveralls.yml</exclude>
-          </excludes>
-        </configuration>
-        <executions>
-          <execution>
-            <goals>
-              <goal>check</goal>
-            </goals>
-            <phase>compile</phase>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
         <groupId>org.eluder.coveralls</groupId>
         <artifactId>coveralls-maven-plugin</artifactId>
         <version>${coveralls-maven-plugin.version}</version>
