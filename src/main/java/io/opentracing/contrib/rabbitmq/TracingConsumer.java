@@ -65,7 +65,7 @@ public class TracingConsumer implements Consumer {
   @Override
   public void handleDelivery(String consumerTag, Envelope envelope, AMQP.BasicProperties properties,
       byte[] body) throws IOException {
-    Span child = TracingUtils.buildChildSpan(properties, queue, tracer);
+    Span child = TracingUtils.buildChildSpan(properties, queue, tracer, envelope.getRoutingKey());
 
     try (Scope ignored = tracer.scopeManager().activate(child)) {
       consumer.handleDelivery(consumerTag, envelope, properties, body);

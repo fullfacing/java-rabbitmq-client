@@ -190,7 +190,7 @@ public class TracingTest {
     try (Scope ignored = mockTracer.activateSpan(span)) {
       Span child = TracingUtils
           .buildChildSpan(new AMQP.BasicProperties().builder().headers(headers).build(),
-              "test", mockTracer);
+              "test", mockTracer, null);
       assertNotNull(child);
     }
     span.finish();
