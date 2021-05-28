@@ -1,0 +1,21 @@
+name: common-api2cart
+on:
+  push:
+    branches: ['*']
+jobs:
+  build:
+    name: Build and Publish
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-java@v1
+        with:
+          java-version: '11'
+      - uses: actions/checkout@v2
+      - uses: actions/cache@v2
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+      - name: Publish Artificat
+        run: mvn publish
