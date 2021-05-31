@@ -18,26 +18,32 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
                           http://maven.apache.org/xsd/settings-1.0.0.xsd">
+
+  <activeProfiles>
+    <activeProfile>github</activeProfile>
+  </activeProfiles>
+
+  <profiles>
+    <profile>
+      <id>github</id>
+      <repositories>
+        <repository>
+          <id>central</id>
+          <url>https://repo1.maven.org/maven2</url>
+        </repository>
+        <repository>
+          <id>github</id>
+          <url>https://maven.pkg.github.com/fullfacing/*</url>
+        </repository>
+      </repositories>
+    </profile>
+  </profiles>
+
   <servers>
     <server>
-      <id>sonatype</id>
-      <username>${env.SONATYPE_USER}</username>
-      <password>${env.SONATYPE_PASSWORD}</password>
-    </server>
-    <server>
-      <id>bintray</id>
-      <username>${env.BINTRAY_USER}</username>
-      <password>${env.BINTRAY_KEY}</password>
-    </server>
-    <server>
-      <id>jfrog-snapshots</id>
-      <username>${env.BINTRAY_USER}</username>
-      <password>${env.BINTRAY_KEY}</password>
-    </server>
-    <server>
-      <id>github.com</id>
-      <username>${env.GH_USER}</username>
-      <password>${env.GH_TOKEN}</password>
+      <id>github</id>
+      <username>fullfacing</username>
+      <password>${env.GITHUB_TOKEN}</password>
     </server>
   </servers>
 </settings>
