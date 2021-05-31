@@ -18,7 +18,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.fullfacing</groupId>
   <artifactId>opentracing-rabbitmq-client</artifactId>
-  <version>0.1.12-SNAPSHOT</version>
+  <version>0.1.13</version>
 
   <name>${project.groupId}:${project.artifactId}</name>
   <description>OpenTracing Instrumentation for RabbitMQ Client</description>
@@ -62,8 +62,6 @@
 
     <opentracing.version>0.33.0</opentracing.version>
     <coveralls-maven-plugin.version>4.3.0</coveralls-maven-plugin.version>
-    <jacoco-maven-plugin.version>0.8.4</jacoco-maven-plugin.version>
-    <qpid-broker.version>7.1.0</qpid-broker.version>
   </properties>
 
   <dependencies>
@@ -79,45 +77,6 @@
       <version>5.8.0</version>
       <scope>provided</scope>
     </dependency>
-
-    <dependency>
-      <groupId>io.opentracing</groupId>
-      <artifactId>opentracing-mock</artifactId>
-      <version>${opentracing.version}</version>
-      <scope>test</scope>
-    </dependency>
-
-    <dependency>
-      <groupId>org.apache.qpid</groupId>
-      <artifactId>qpid-broker</artifactId>
-      <version>${qpid-broker.version}</version>
-      <scope>test</scope>
-    </dependency>
-
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.12</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>pl.pragmatists</groupId>
-      <artifactId>JUnitParams</artifactId>
-      <version>1.1.1</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.awaitility</groupId>
-      <artifactId>awaitility</artifactId>
-      <version>3.1.6</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.mockito</groupId>
-      <artifactId>mockito-core</artifactId>
-      <version>3.3.3</version>
-      <scope>test</scope>
-    </dependency>
   </dependencies>
 
   <build>
@@ -132,35 +91,20 @@
         </configuration>
       </plugin>
       <plugin>
-        <artifactId>maven-release-plugin</artifactId>
-        <version>2.5.3</version>
-        <configuration>
-          <useReleaseProfile>false</useReleaseProfile>
-          <releaseProfiles>release</releaseProfiles>
-          <autoVersionSubmodules>true</autoVersionSubmodules>
-          <tagNameFormat>@{project.version}</tagNameFormat>
-        </configuration>
-      </plugin>
-      <plugin>
         <groupId>org.eluder.coveralls</groupId>
         <artifactId>coveralls-maven-plugin</artifactId>
         <version>${coveralls-maven-plugin.version}</version>
       </plugin>
-      <plugin>
-        <groupId>org.jacoco</groupId>
-        <artifactId>jacoco-maven-plugin</artifactId>
-        <version>${jacoco-maven-plugin.version}</version>
-        <executions>
-          <execution>
-            <id>prepare-agent</id>
-            <goals>
-              <goal>prepare-agent</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
     </plugins>
   </build>
+
+  <distributionManagement>
+    <repository>
+      <id>github</id>
+      <name>GitHub Fullfacing Apache Maven Packages</name>
+      <url>https://maven.pkg.github.com/fullfacing/java-rabbitmq-client</url>
+    </repository>
+  </distributionManagement>
 
   <repositories>
     <repository>
@@ -170,59 +114,4 @@
       <layout>default</layout>
     </repository>
   </repositories>
-
-  <distributionManagement>
-    <repository>
-      <id>bintray</id>
-      <url>https://api.bintray.com/maven/opentracing/maven/opentracing-rabbitmq-client/;publish=1
-      </url>
-    </repository>
-    <snapshotRepository>
-      <id>jfrog-snapshots</id>
-      <url>http://oss.jfrog.org/artifactory/oss-snapshot-local</url>
-    </snapshotRepository>
-  </distributionManagement>
-
-  <profiles>
-    <profile>
-      <id>release</id>
-      <build>
-        <plugins>
-          <!-- Creates source jar -->
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-source-plugin</artifactId>
-            <version>3.1.0</version>
-            <executions>
-              <execution>
-                <id>attach-sources</id>
-                <goals>
-                  <goal>jar</goal>
-                </goals>
-              </execution>
-            </executions>
-          </plugin>
-          <!-- Creates javadoc jar -->
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-javadoc-plugin</artifactId>
-            <version>3.1.1</version>
-            <configuration>
-              <failOnError>false</failOnError>
-            </configuration>
-            <executions>
-              <execution>
-                <id>attach-javadocs</id>
-                <goals>
-                  <goal>jar</goal>
-                </goals>
-                <phase>package</phase>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-  </profiles>
-
 </project>
