@@ -102,7 +102,7 @@
     <repository>
       <id>github</id>
       <name>GitHub Fullfacing Apache Maven Packages</name>
-      <url>https://maven.pkg.github.com/fullfacing/opentracing-rabbitmq-client</url>
+      <url>https://maven.pkg.github.com/fullfacing/java-rabbitmq-client</url>
     </repository>
   </distributionManagement>
 
