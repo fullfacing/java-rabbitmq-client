@@ -18,7 +18,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.fullfacing</groupId>
   <artifactId>opentracing-rabbitmq-client</artifactId>
-  <version>0.1.12</version>
+  <version>0.1.13</version>
 
   <name>${project.groupId}:${project.artifactId}</name>
   <description>OpenTracing Instrumentation for RabbitMQ Client</description>
